@@ -28,6 +28,7 @@ process VEP {
         --cache \
         --offline \
         --everything \
+        ${params.cadd ? '--plugin CADD,snv=params.cadd_snv,indels=params.cadd_indels' : ''} \
         --format vcf \
         --vcf \
         --compress_output bgzip \

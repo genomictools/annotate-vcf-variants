@@ -30,6 +30,7 @@ module load Nextflow
 nextflow run ../main.nf \
     --output_dir ./results/ \
     -profile local,test \
+    -params-file ../test-params.json \
     -with-report ./report.html \
     -with-timeline ./timeline.html \
     -resume

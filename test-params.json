@@ -4,5 +4,5 @@
     "vep_version"   : "110",
     "cadd"          : true,
     "cadd_snv"      : "/data/reference-data/CADD/v1.6/prescored/GRCh38_v1.6/no_anno/whole_genome_SNVs.tsv.gz",
-    "cadd_indel"    : "/data/reference-data/CADD/v1.6/prescored/GRCh38_v1.6/no_anno/gnomad.genomes.r3.0.indel.tsv.gz"
+    "cadd_indel"    : "/data/reference-data/CADD/v1.6/prescored/GRCh38_v1.6/no_anno/gnomad.genomes.r3.0.indel.tsv.gz",
 }

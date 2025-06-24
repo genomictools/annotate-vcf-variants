@@ -15,6 +15,11 @@ process VEP {
           path("${id}.annotated.vcf.gz.tbi")
 
     script:
+    def args = []
+    if ( params.cadd )     { args << "--plugin CADD,snv=${params.cadd_snv},indels=${params.cadd_indel}" }
+    if ( params.spliceai ) { args << "--plugin SpliceAI,snv=${params.spliceai_snv},indel=${params.spliceai_indel}" }
+    def args_str = args.join(' ')
+
     """
     #!/bin/bash
     vep \
@@ -28,11 +33,11 @@ process VEP {
         --cache \
         --offline \
         --everything \
-        ${params.cadd ? '--plugin CADD,snv=params.cadd_snv,indels=params.cadd_indels' : ''} \
         --format vcf \
         --vcf \
         --compress_output bgzip \
-        --fork ${task.cpus}
+        --fork ${task.cpus} \
+        ${args_str}
 
     tabix ${id}.annotated.vcf.gz
     """

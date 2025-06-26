@@ -18,6 +18,7 @@ process VEP {
     def args = []
     if ( params.cadd )     { args << "--plugin CADD,snv=${params.cadd_snv},indels=${params.cadd_indel}" }
     if ( params.spliceai ) { args << "--plugin SpliceAI,snv=${params.spliceai_snv},indel=${params.spliceai_indel}" }
+    if ( params.gnomad )   { args << "--custom ${params.gnomad_file},gnomAD,vcf,exact,0,AF" }
     def args_str = args.join(' ')
 
     """

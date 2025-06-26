@@ -5,4 +5,6 @@
     "cadd"          : true,
     "cadd_snv"      : "/data/reference-data/CADD/v1.6/prescored/GRCh38_v1.6/no_anno/whole_genome_SNVs.tsv.gz",
     "cadd_indel"    : "/data/reference-data/CADD/v1.6/prescored/GRCh38_v1.6/no_anno/gnomad.genomes.r3.0.indel.tsv.gz",
+    "gnomad"        : true,
+    "gnomad_file"   : "/data/reference-data/BroadInstitute/GnomAD/v4_GRCh38/gnomad4.0_GRCh38_combined_af.vcf.bgz"
 }

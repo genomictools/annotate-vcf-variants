@@ -1,0 +1,30 @@
+nextflow_pipeline {
+
+    name "Test Workflow main.nf"
+    script "main.nf"
+
+    test("Should run without failures") {
+
+        when {
+            params {
+                tool    = "vep"
+                version = "110"
+                cadd    = true
+                gnomad  = true
+                cohort_info    = "/data/rds/DGE/DUDGE/MOPOPGEN/mahmed03/genomictools/annotate-vcf-variants/tests/input/cohort_info.csv"
+                fasta          = "/data/reference-data/iGenomes/Homo_sapiens/GATK/GRCh38/Sequence/WholeGenomeFasta/Homo_sapiens_assembly38.fasta"
+                vep_cache      = "/data/reference-data/Ensembl/110"
+                cadd_snv       = "/data/reference-data/CADD/v1.6/prescored/GRCh38_v1.6/no_anno/whole_genome_SNVs.tsv.gz"
+                cadd_indel     = "/data/reference-data/CADD/v1.6/prescored/GRCh38_v1.6/no_anno/gnomad.genomes.r3.0.indel.tsv.gz"
+                gnomad_file    = "/data/reference-data/BroadInstitute/GnomAD/v4_GRCh38/gnomad4.0_GRCh38_combined_af.vcf.bgz"
+                annotation     = "/data/rds/DGE/DUDGE/MOPOPGEN/mahmed03/cache/gencode.v38.annotation.db"
+            }
+        }
+
+        then {
+            assert workflow.success
+        }
+
+    }
+
+}

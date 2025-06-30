@@ -16,10 +16,13 @@ process ANNOTATE {
           path("${cohort}.${assembly}.${tool}.${version}.vcf.gz.tbi")
 
     script:
+    def tag = ''
+    if ( params.tool  == "vep")      { tag < "CSQ" }
+    if ( params.tool  == "spliceai") { tag < "SpliceAI" }
     """
     #!/bin/bash
     # Rename and annotate
-    bcftools annotate -a ${anno_file} -c INFO -h <(bcftools view -h ${anno_file} | grep CSQ) ${vcf} | \
+    bcftools annotate -a ${anno_file} -c INFO -h <(bcftools view -h ${anno_file} | grep ${tag}) ${vcf} | \
     bcftools view --threads ${task.cpus} -Oz -o ${cohort}.${assembly}.${tool}.${version}.vcf.gz
     tabix ${cohort}.${assembly}.${tool}.${version}.vcf.gz
     """

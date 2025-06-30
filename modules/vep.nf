@@ -1,5 +1,5 @@
 process VEP {
-    tag "${id}"
+    tag "${params.assembly}:${params.tool}:${params.version}:${id}"
 
     label 'simple'
     label 'vep'
@@ -10,9 +10,10 @@ process VEP {
     tuple val(id), path(file), path(index)
 
     output:
-    tuple val("${params.assembly}.${params.vep_version}"), val(id),
-          path("${id}.annotated.vcf.gz"),
-          path("${id}.annotated.vcf.gz.tbi")
+    tuple val("${params.assembly}"), val("${params.tool}"), val("${params.version}"),
+          val(id),
+          path("${params.assembly}.${params.tool}.${params.version}.${id}.vcf.gz"),
+          path("${params.assembly}.${params.tool}.${params.version}.${id}.vcf.gz.tbi")
 
     script:
     def args = []
@@ -25,10 +26,10 @@ process VEP {
     #!/bin/bash
     vep \
         -i ${file} \
-        -o ${id}.annotated.vcf.gz \
+        -o ${params.assembly}.${params.tool}.${params.version}.${id}.vcf.gz \
         --species ${params.species} \
         --assembly ${params.assembly} \
-        --cache_version ${params.vep_version} \
+        --cache_version ${params.version} \
         --dir_cache ${params.vep_cache} \
         --fasta ${params.fasta} \
         --cache \
@@ -40,6 +41,6 @@ process VEP {
         --fork ${task.cpus} \
         ${args_str}
 
-    tabix ${id}.annotated.vcf.gz
+    tabix ${params.assembly}.${params.tool}.${params.version}.${id}.vcf.gz
     """
 }

@@ -28,7 +28,10 @@ workflow {
 
     annotations_ch = Channel.fromPath(params.annotations)
         | splitCsv(header: true, sep: ',')
-        | map { row -> [ row.version, file(row.file), file(row.index) ]}
+        | map { row -> [
+            row.assembly, row.tool, row.version,
+            file(row.file), file(row.index)
+        ]}
 
     annotate_vcf(cohort_info_ch, annotations_ch)
 }

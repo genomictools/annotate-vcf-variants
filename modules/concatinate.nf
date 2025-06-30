@@ -1,5 +1,5 @@
 process CONCATINATE {
-    tag "${version}"
+    tag "${assembly}:${tool}:${version}"
 
     label 'simple'
     label 'bcftools'
@@ -8,13 +8,14 @@ process CONCATINATE {
     publishDir("${params.output_dir}/concatinated/", mode: 'copy')
 
     input:
-    tuple val(version), val(id), path(file), path(index)
+    tuple val(assembly), val(tool), val(version), 
+          val(id), path(file), path(index)
 
     output:
-    tuple val(version), 
-          path("${version}.annotations.vcf.gz"),
-          path("${version}.annotations.vcf.gz.tbi")
-        
+    tuple val(assembly), val(tool), val(version), 
+          path("${assembly}.${tool}.${version}.vcf.gz"),
+          path("${assembly}.${tool}.${version}.vcf.gz.tbi")
+
     script:
     """
     #!/bin/bash
@@ -23,8 +24,8 @@ process CONCATINATE {
         -f <(echo "${file.join('\n')}" | sort -V) \
         --naive \
         --threads ${task.cpus} \
-        -Oz -o ${version}.annotations.vcf.gz
+        -Oz -o ${assembly}.${tool}.${version}.vcf.gz
 
-    tabix ${version}.annotations.vcf.gz
+    tabix ${assembly}.${tool}.${version}.vcf.gz
     """
 }

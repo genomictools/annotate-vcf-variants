@@ -15,6 +15,12 @@ workflow {
         | map { row -> [ row.cohort, file(row.file), file(row.index) ]}
 
     variants      = split_vcf(cohort_info_ch)
-    annotations   = run_vep(variants)
+    if ( params.tool == 'vep' ) {
+        annotations   = run_vep(variants)
+    // } else if ( params.tool == 'snpEff' ) {
+    //     vep_results = run_snpEff(variants, params.snpEff_data)
+    } else {
+        error "Unsupported tool: ${params.tool}"
+    }
     annotated_vcf = annotate_vcf(cohort_info_ch, annotations)
 }

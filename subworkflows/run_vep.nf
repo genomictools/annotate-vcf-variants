@@ -13,7 +13,7 @@ workflow run_vep {
     main:
     variants
         | VEP
-        | groupTuple(by: 0)
+        | groupTuple(by: [0,1,2])
         | CONCATINATE
 
     emit:

@@ -19,7 +19,9 @@ process ANNOTATE {
     def tag = ''
     if ( params.tool  == "vep")      { tag < "CSQ" }
     if ( params.tool  == "spliceai") { tag < "SpliceAI" }
-    """
+    if ( params.tool  == "pangolin") { tag < "PANGOLIN" }
+
+	"""
     #!/bin/bash
     # Rename and annotate
     bcftools annotate -a ${anno_file} -c INFO -h <(bcftools view -h ${anno_file} | grep ${tag}) ${vcf} | \

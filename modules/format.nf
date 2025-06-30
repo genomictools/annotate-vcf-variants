@@ -48,6 +48,17 @@ process FORMAT {
         tr '|' '\\t' \
         >> ${cohort}.${assembly}.${tool}.${version}.tsv
         """
+    } else if ( params.tool == "pangolin" ) {
+        """
+        #!/bin/bash
+        # Format SpliceAI to TSV
+        echo -e "VARIANT\tgene\tpos:largest_increase\tpos:largest_decrease" \
+        > ${cohort}.${assembly}.${tool}.${version}.tsv
+        
+        bcftools query -f '%CHROM:%POS:%REF:%ALT;%PANGOLIN\n' ${file} | \
+        tr '|' '\\t' \
+        >> ${cohort}.${assembly}.${tool}.${version}.tsv
+        """
     } else {
         error "Unsupported tool: ${params.tool}"
     }

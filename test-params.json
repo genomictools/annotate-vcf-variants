@@ -4,5 +4,6 @@
     "vep_cache"     : "/data/reference-data/Ensembl/110",
     "cadd_snv"      : "/data/reference-data/CADD/v1.6/prescored/GRCh38_v1.6/no_anno/whole_genome_SNVs.tsv.gz",
     "cadd_indel"    : "/data/reference-data/CADD/v1.6/prescored/GRCh38_v1.6/no_anno/gnomad.genomes.r3.0.indel.tsv.gz",
-    "gnomad_file"   : "/data/reference-data/BroadInstitute/GnomAD/v4_GRCh38/gnomad4.0_GRCh38_combined_af.vcf.bgz"
+    "gnomad_file"   : "/data/reference-data/BroadInstitute/GnomAD/v4_GRCh38/gnomad4.0_GRCh38_combined_af.vcf.bgz",
+    "annotation"    : "/data/rds/DGE/DUDGE/MOPOPGEN/mahmed03/cache/gencode.v38.annotation.db"
 }

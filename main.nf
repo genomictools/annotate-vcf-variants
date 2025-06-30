@@ -20,6 +20,8 @@ workflow {
         annotations   = run_vep(variants)
     } else if ( params.tool == 'spliceai' ) {
         annotations   = run_spliceai(variants)
+    } else if ( params.tool == 'pangolin' ) {
+        annotations   = run_pangolin(variants)
     } else {
         error "Unsupported tool: ${params.tool}"
     }

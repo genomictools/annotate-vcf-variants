@@ -5,6 +5,7 @@ nextflow.enable.dsl=2
 // Include subworkflow
 include { split_vcf }       from './subworkflows/split_vcf.nf'
 include { run_vep }         from './subworkflows/run_vep.nf'
+include { run_spliceai }    from './subworkflows/run_spliceai.nf'
 include { annotate_vcf }    from './subworkflows/annotate_vcf.nf'
 
 // Workflow
@@ -17,8 +18,8 @@ workflow {
     variants      = split_vcf(cohort_info_ch)
     if ( params.tool == 'vep' ) {
         annotations   = run_vep(variants)
-    // } else if ( params.tool == 'snpEff' ) {
-    //     vep_results = run_snpEff(variants, params.snpEff_data)
+    } else if ( params.tool == 'spliceai' ) {
+        annotations   = run_spliceai(variants)
     } else {
         error "Unsupported tool: ${params.tool}"
     }

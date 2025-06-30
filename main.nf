@@ -3,7 +3,9 @@
 nextflow.enable.dsl=2
 
 // Include subworkflow
-include { annotate_vcf_vep }    from './subworkflows/annotate_vcf_vep.nf'
+include { split_vcf }       from './subworkflows/split_vcf.nf'
+include { run_vep }         from './subworkflows/run_vep.nf'
+include { annotate_vcf }    from './subworkflows/annotate_vcf.nf'
 
 // Workflow
 workflow {
@@ -12,5 +14,7 @@ workflow {
         | splitCsv(header: true, sep: ',')
         | map { row -> [ row.cohort, file(row.file), file(row.index) ]}
 
-    annotate_vcf_vep(cohort_info_ch)
+    variants      = split_vcf(cohort_info_ch)
+    annotations   = run_vep(variants)
+    annotated_vcf = annotate_vcf(cohort_info_ch, annotations)
 }

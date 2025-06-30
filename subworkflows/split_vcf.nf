@@ -5,17 +5,14 @@ nextflow.enable.dsl=2
 // Include modules
 include { EXTRACT }     from '../modules/extract.nf'
 include { CONVERT }     from '../modules/convert.nf'
-include { VEP }         from '../modules/vep.nf'
-include { CONCATINATE } from '../modules/concatinate.nf'
-include { ANNOTATE }    from '../modules/annotate.nf'
 include { SORT_UNIQ }   from '../modules/sort_uniq.nf'
 
-workflow annotate_vcf_vep {
+workflow split_vcf {
     take:
-    cohort_info_ch
+    cohort_info
 
     main:
-    cohort_info_ch
+    cohort_info
         | EXTRACT
         | map { it.last() }
         | collectFile(
@@ -31,13 +28,9 @@ workflow annotate_vcf_vep {
         )
         | map { [it.fileName, it] }
         | CONVERT
-        | VEP
-        | groupTuple(by: 0)
-        | CONCATINATE
-        | combine(cohort_info_ch)
-        | ANNOTATE
+
     emit:
-    ANNOTATE.out
+    CONVERT.out
 }
 
 // Workflow
@@ -47,5 +40,5 @@ workflow {
         | splitCsv(header: true, sep: ',')
         | map { row -> [ row.cohort, file(row.file), file(row.index) ]}
 
-    annotate_vcf_vep(cohort_info_ch)
+    split_vcf(cohort_info_ch)
 }

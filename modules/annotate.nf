@@ -11,7 +11,7 @@ process ANNOTATE {
           val(cohort), path(vcf), path(vcf_index)
 
     output:
-    tuple val(cohort), val(version), val(assembly), val(tool), val(version),
+    tuple val(cohort), val(assembly), val(tool), val(version),
           path("${cohort}.${assembly}.${tool}.${version}.vcf.gz"),
           path("${cohort}.${assembly}.${tool}.${version}.vcf.gz.tbi")
 

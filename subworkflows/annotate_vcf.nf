@@ -4,6 +4,7 @@ nextflow.enable.dsl=2
 
 // Include modules
 include { ANNOTATE }    from '../modules/annotate.nf'
+include { FORMAT }      from '../modules/format.nf'
 
 workflow annotate_vcf {
     take:
@@ -14,6 +15,7 @@ workflow annotate_vcf {
     annotations
         | combine(cohort_info)
         | ANNOTATE
+        | FORMAT
 
     emit:
     ANNOTATE.out

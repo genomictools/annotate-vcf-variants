@@ -29,7 +29,7 @@ module load Nextflow
 # nextflow run houlstonlab/annotate-vcf-vep -r v0.1 \
 nextflow run ../main.nf \
     --output_dir ./results/ \
-    -profile local,test_spliceai \
+    -profile cluster,test_vep \
     -params-file ../test-params.json \
     -with-report ./report.html \
     -with-timeline ./timeline.html \

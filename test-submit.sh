@@ -21,7 +21,7 @@ mkdir -p tests tests/input
 URL="https://raw.githubusercontent.com/genomictools/test-datasets/refs/heads/annotate-vcf-variants"
 wget -c $URL/pheno.variants.vcf.gz -O tests/input/pheno.variants.vcf.gz
 wget -c $URL/pheno.variants.vcf.gz.tbi -O tests/input/pheno.variants.vcf.gz.tbi
-wget -c $URL/cohort_info.csv-O tests/input/cohort_info.csv
+wget -c $URL/cohort_info.csv -O tests/input/cohort_info.csv
 
 # # Run tests
 # ./nf-test test tests/main.nf.test

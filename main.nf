@@ -6,6 +6,7 @@ nextflow.enable.dsl=2
 include { split_vcf }       from './subworkflows/split_vcf.nf'
 include { run_vep }         from './subworkflows/run_vep.nf'
 include { run_spliceai }    from './subworkflows/run_spliceai.nf'
+include { run_alphagenome } from './subworkflows/run_alphagenome.nf'
 include { annotate_vcf }    from './subworkflows/annotate_vcf.nf'
 
 // Workflow
@@ -22,6 +23,8 @@ workflow {
         annotations   = run_spliceai(variants)
     } else if ( params.tool == 'pangolin' ) {
         annotations   = run_pangolin(variants)
+    } else if ( params.tool == 'alphagenome' ) {
+        annotations   = run_alphagenome(variants)
     } else {
         error "Unsupported tool: ${params.tool}"
     }

@@ -9,3 +9,7 @@
 	path = subworkflows
 	url = git@github.com:genomictools/subworkflows.git
 	branch = annotate-vcf-variants
+[submodule "bin"]
+	path = bin
+	url = git@github.com:genomictools/bin.git
+	branch = annotate-vcf-variants

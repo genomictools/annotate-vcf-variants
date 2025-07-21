@@ -48,6 +48,9 @@ The workflow currently supports, `tool`:
 - `chunk`: Default 10
 - `limit`: Default 30
 
+- `normalize`: Default true
+- `remove_ambiguous`: Default true
+  
 ### Output
 
 The pipeline consists of three subworkflows that are exucted in order

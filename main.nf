@@ -8,6 +8,7 @@ include { run_vep }         from './subworkflows/run_vep.nf'
 include { run_spliceai }    from './subworkflows/run_spliceai.nf'
 include { run_alphagenome } from './subworkflows/run_alphagenome.nf'
 include { run_atsnp }       from './subworkflows/run_atsnp.nf'
+include { run_deepmvp }     from './subworkflows/run_deepmvp.nf'
 include { annotate_vcf }    from './subworkflows/annotate_vcf.nf'
 
 // Workflow
@@ -28,6 +29,8 @@ workflow {
         annotations   = run_alphagenome(variants)
     } else if ( params.tool == 'atsnp' ) {
         annotations   = run_atsnp(variants)
+    } else if ( params.tool == 'deepmvp' ) {
+        annotations   = run_deepmvp(variants)
     } else {
         error "Unsupported tool: ${params.tool}"
     }

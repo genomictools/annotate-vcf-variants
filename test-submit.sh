@@ -33,10 +33,8 @@ cd tests/
 # nextflow run houlstonlab/annotate-vcf-vep -r v0.1 \
 nextflow run ../main.nf \
     --output_dir ./results/ \
-    -profile local,test \
+    -profile cluster,test \
     -params-file ../test-params.json \
-    -with-report ./report.html \
-    -with-timeline ./timeline.html \
     -resume
 
 # # usage: nextflow run [ local_dir/main.nf | git_url ]  

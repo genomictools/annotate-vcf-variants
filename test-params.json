@@ -4,11 +4,12 @@
     "vep_cache"     : "/data/reference-data/Ensembl/110",
     "cadd_snv"      : "/data/reference-data/CADD/v1.6/prescored/GRCh38_v1.6/no_anno/whole_genome_SNVs.tsv.gz",
     "cadd_indel"    : "/data/reference-data/CADD/v1.6/prescored/GRCh38_v1.6/no_anno/gnomad.genomes.r3.0.indel.tsv.gz",
+    "spliceai_snv"  : "/data/rds/DGE/DUDGE/MOPOPGEN/mahmed03/cache/spliceai_v1.3/spliceai_scores.masked.snv.hg38.vcf.gz",
+    "spliceai_indel": "/data/rds/DGE/DUDGE/MOPOPGEN/mahmed03/cache/spliceai_v1.3/spliceai_scores.masked.indel.hg38.vcf.gz",
     "gnomad_file"   : "/data/reference-data/BroadInstitute/GnomAD/v4_GRCh38/gnomad4.0_GRCh38_combined_af.vcf.bgz",
     "annotation"    : "/data/rds/DGE/DUDGE/MOPOPGEN/mahmed03/cache/gencode.v38.annotation.db",
-    "spliceai_snv"  : "/data/rds/DGE/DUDGE/MOPOPGEN/mahmed03/cache/spliceai_v1.3/spliceai_scores.masked.snv.hg38.vcf.gz.tbi",
-    "spliceai_indel": "/data/rds/DGE/DUDGE/MOPOPGEN/mahmed03/cache/spliceai_v1.3/spliceai_scores.masked.indel.hg38.vcf.gz.tbi",
     "uniprot"       : "/data/rds/DGE/DUDGE/MOPOPGEN/mahmed03/cache/deepmvp/uniprot_sprot_modified.fasta",
     "models"        : "/data/rds/DGE/DUDGE/MOPOPGEN/mahmed03/cache/deepmvp/models",
-    "gff"           : "/data/rds/DGE/DUDGE/MOPOPGEN/mahmed03/cache/deepmvp/Homo_sapiens.GRCh38.114.chr.gff3"
+    "gff"           : "/data/rds/DGE/DUDGE/MOPOPGEN/mahmed03/cache/deepmvp/Homo_sapiens.GRCh38.114.chr.gff3",
+    "human_ancestor": "/data/rds/DGE/DUDGE/MOPOPGEN/mahmed03/cache/loftee/human_ancestor.fa.gz"
 }

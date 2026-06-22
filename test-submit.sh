@@ -24,7 +24,7 @@ cd tests/
 # nextflow run genomictools/annotate-vcf-variants -r v0.1 \
 nextflow run ../main.nf \
     --output_dir ./results/ \
-    -profile cluster,test \
+    -profile local,test \
     -params-file ../test-params.json \
     -resume
 

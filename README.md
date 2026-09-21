@@ -24,32 +24,64 @@ nextflow run genomictools/annotate-vcf-variants/main.nf \
 
 ### Inputs & Parameters
 
-The workflow currently supports, `tool`: 
+The workflow supports multiple annotation tools via the `tools` parameter, which accepts a comma-separated list:
   - `vep`
   - `spliceai`
   - `pangolin`
   - `alphagenome`
+  - `atsnp`
+  - `deepmvp`
 
-- when `tool = 'vep'`
-  - `species`: Default 'homo_sapiens'
-  - `assembly`: Default 'GRCh38'
-  - `cadd`: Default false
-  - `spliceai`: Default false
-  - `gnomad`: Default false
+#### Common Parameters
+- `chunk`: Default 10 - Number of variants per chunk for parallel processing
+- `limit`: Default 30 - Maximum number of variants to process
+- `normalize`: Default true - Normalize VCF before annotation
+- `remove_ambiguous`: Default true - Remove ambiguous variants
+- `version`: Tool-specific version string
 
-- when `tool = 'spliceai'` or `tool = 'pangolin'`
-  - `distance`: Default 50
-  - `masked`: Default true
+#### VEP (Ensembl Variant Effect Predictor)
+- `species`: Default 'human' - Organism species
+- `assembly`: Default 'GRCh38' - Genome assembly
+- `vep_cache`: Path to VEP cache directory (required)
+- `fasta`: Path to reference FASTA file (required)
+- `cadd_snv`: Path to CADD SNV database (optional)
+- `cadd_indel`: Path to CADD indel database (optional)
+- `spliceai_snv`: Path to SpliceAI SNV database (optional)
+- `spliceai_indel`: Path to SpliceAI indel database (optional)
+- `gnomad`: Path to gnomAD database VCF (optional)
+- `clinvar`: Path to ClinVar database (optional)
+- `human_ancestor`: Path to human ancestor FASTA (optional)
+- `loftee_conserv`: Default false - LoFtEE conservation file
+- `loftee_gerp`: Default false - LoFtEE GERP file
+- `filter_position`: Default 0.05 - LoFtEE filter position
+- `min_intron_size`: Default 15 - LoFtEE minimum intron size
 
-- when `tool = 'alphagenome'`
-  - `species`: Default 'homo_sapiens'. 
-  - `distance`: Default 50
+#### SpliceAI
+- `assembly`: Default 'GRCh38' - Genome assembly
+- `masked`: Default true - Use masked sequence input
+- `fasta`: Path to reference FASTA file (optional)
 
-- `chunk`: Default 10
-- `limit`: Default 30
+#### Pangolin
+- `assembly`: Default 'GRCh38' - Genome assembly
+- `masked`: Default true - Use masked sequence
+- `distance`: Default 50 - Distance for annotation
+- `fasta`: Path to reference FASTA file (required)
+- `annotation`: Path to annotation file (required)
 
-- `normalize`: Default true
-- `remove_ambiguous`: Default true
+#### atSNP
+- `species`: Default 'human' - Organism species
+- `motifs`: Default "ENCODE" - Motif database to use
+
+#### AlphaGenome
+- `species`: Default 'human' - Organism species (homo_sapiens or human)
+- `seq_length`: Default "1MB" - Sequence context length
+- `API_KEY`: AlphaGenome API key (required, set via `nextflow secret set API_KEY <key>`)
+
+#### DeepMVP
+- `assembly`: Default 'GRCh38' - Genome assembly
+- `missense_only`: Default false - Only annotate missense variants
+- `models`: Path to DeepMVP model directory (required)
+- `uniprot`: Path to UniProt database (required)
   
 ### Output
 
@@ -78,9 +110,9 @@ echo "cohort1,pheno.variants.vcf.gz,pheno.variants.vcf.gz.tbi" >> cohort_info.cs
 ```json
 params {
   "cohort_info" : "cohort_info.csv",
-  "tool"        : "alphagenome"
-  "version"     : "0.1"
-  "species"     : "human"
+  "tool"        : "alphagenome",
+  "version"     : "0.1",
+  "species"     : "human",
   "distance"    : "1MB"
 }
 ```

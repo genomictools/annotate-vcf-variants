@@ -1,0 +1,2 @@
+cohort,file,index
+cohort1,input/pheno.variants.vcf.gz,input/pheno.variants.vcf.gz.tbi
